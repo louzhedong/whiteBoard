@@ -13,9 +13,9 @@ let mouseX = 100,
 
 let snapshoot = []; // 快照
 let step = -1; // 当前的快照索引
-  
+
 /**
- * 画图案
+ * 画笔
  * @param {} pos 
  * 
  */
@@ -79,13 +79,13 @@ function setPosition(e) {
   } else if (mode === 'ERASER') {
     eraser(position);
   }
-  
+
   oldPosition = position;
 }
 
 // 保存当前画布到快照
 function saveCurrentToSnapshoot() {
-  step ++;
+  step++;
   if (step < snapshoot.length) {
     snapshoot.length = step;
   }
@@ -93,33 +93,35 @@ function saveCurrentToSnapshoot() {
 }
 
 /**
- * 撤销
+ * 撤销和反撤销
+ * type 为 undo, redo
  */
-function canvasUndo() {
-  if(step >= 0) {
-    step --;
-    canvas_context.clearRect(0, 0, canvas_width, canvas_height);
-    let image = new Image();
-    image.src = snapshoot[step];
-    image.addEventListener('load', function() {
-      canvas_context.drawImage(image, 0, 0);
-    })
+function canvasUndoOrRedo(type) {
+  if (step >= 0 && type === 'undo') {
+    step--;
+    operate();
   }
-}
+  if (step <= snapshoot.length && type === 'redo') {
+    step++;
+    operate();
+  }
 
-/**
- * 反撤销
- */
-function canvasRedo() {
-  if (step <= snapshoot.length) {
-    step ++;
-    canvas_context.clearRect(0, 0, canvas_width, canvas_height);
+  function operate() {
     let image = new Image();
     image.src = snapshoot[step];
-    image.addEventListener('load', function() {
-      canvas_context.drawImage(image, 0, 0);
+    image.addEventListener('load', function () {
+      let cacheCanvas = document.createElement('canvas');
+      let cacheCtx = cacheCanvas.getContext('2d');
+      cacheCanvas.width = canvas_width;
+      cacheCanvas.height = canvas_height;
+      cacheCtx.drawImage(image, 0, 0);
+      canvas_context.clearRect(0, 0, canvas_width, canvas_height);
+      canvas_context.drawImage(cacheCanvas, 0, 0);
+      cacheCanvas = null;  // 回收变量
+      cacheCtx = null;
     })
   }
+
 }
 
 window.onload = function () {
@@ -132,19 +134,19 @@ window.onload = function () {
   const $pencil = document.querySelector('.pencil');
   const $eraser = document.querySelector('.eraser');
   const $clean = this.document.querySelector('.clean');
-  $pencil.addEventListener('click', function() {
+  $pencil.addEventListener('click', function () {
     mode = 'PENCIL';
   });
 
-  $eraser.addEventListener('click', function() {
+  $eraser.addEventListener('click', function () {
     mode = 'ERASER';
   });
 
-  $clean.addEventListener('click', function() {
+  $clean.addEventListener('click', function () {
     clean();
   })
 
-  element.onmousedown = function(e) {
+  element.onmousedown = function (e) {
     drawing = true;
   }
 
@@ -152,7 +154,7 @@ window.onload = function () {
     if (drawing) setPosition(e);
   }
 
-  element.onmouseup = function(e) {
+  element.onmouseup = function (e) {
     drawing = false;
     oldPosition = {};
     saveCurrentToSnapshoot();
