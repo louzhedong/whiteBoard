@@ -1,3 +1,5 @@
+import './style.css';
+
 let mouseX = 100,
   mouseY = 100,
   lineColor = 'red',
