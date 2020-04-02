@@ -82,12 +82,13 @@ Board.prototype.draw_canvas = function (pos) {
 // 橡皮擦
 Board.prototype.eraser = function (pos) {
   if (this.oldPosition) {
+    const canvas_context = this.canvas_context;
     canvas_context.strokeStyle = '#fff';
     canvas_context.lineWidth = 20;
     canvas_context.lineCap = 'round';
     canvas_context.beginPath();
     canvas_context.moveTo(this.oldPosition.x, this.oldPosition.y);
-    canvas_context.lineTo(this.pos.x, this.pos.y);
+    canvas_context.lineTo(pos.x, pos.y);
     canvas_context.stroke();
     canvas_context.closePath();
   }
@@ -129,7 +130,7 @@ Board.prototype.setPosition = function (e) {
 Board.prototype.saveCurrentToSnapshoot = function () {
   this.step++;
   if (this.step < this.snapshoot.length) {
-    this.snapshoot.length = step;
+    this.snapshoot.length = this.step;
   }
   this.snapshoot.push(this.canvas_element.toDataURL());
 }

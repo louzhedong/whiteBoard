@@ -2,19 +2,38 @@
 
 <head>
   <title>小白板</title>
-  <!-- <link rel="stylesheet" href="style.css"> -->
-  <link rel="stylesheet" href="//at.alicdn.com/t/font_322656_a7z8lbp9wz7.css">
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_322656_3b71cae2bqa.css">
 </head>
 
 <body>
-  <canvas id="whiteBoard" width="800" height="600"></canvas>
-  <span class="iconfont">&#xe75c;</span>
-  <button class="pencil">铅笔</button>
-  <button class="eraser">橡皮</button>
-  <button class="clean">清空</button>
-  <button class="undo">撤销</button>
-  <button class="redo">前进</button>
+  <div class="canvas-content">
+    <canvas id="whiteBoard" width="800" height="600"></canvas>
+    <div class="operate-content">
+      <div class="pencil icon-content">
+        <span class="iconfont">&#xe75c;</span>
+      </div>
+      <div class="text icon-content">
+        <span class="iconfont">&#xe75d;</span>
+      </div>
+      <div class="eraser icon-content">
+        <span class="iconfont">&#xe75e;</span>
+      </div>
+      <div class="rectangle icon-content">
+        <span class="iconfont">&#xe75f;</span>
+      </div>
+      <div class="circle icon-content">
+        <span class="iconfont">&#xe760;</span>
+      </div>
+      <div class="undo icon-content">
+        <span class="iconfont">&#xe656;</span>
+      </div>
+      <div class="redo icon-content">
+        <span class="iconfont">&#xe654;</span>
+      </div>
+      <div class="clean icon-content">
+        <span class="iconfont">&#xe62b;</span>
+      </div>
+    </div>
+  </div>
 </body>
-<!-- <script src="index.js"></script> -->
-
 </html>

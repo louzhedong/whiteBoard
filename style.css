@@ -2,6 +2,33 @@ body {
   background: #eee;
 }
 
+.canvas-content {
+  width: 800px;
+  position: relative;
+}
+
+.operate-content {
+  background:rgba(36,43,51,1);
+  width: 40px;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.operate-content .icon-content {
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.operate-content .icon-content .iconfont {
+  color: #fff;
+  font-size: 20px;
+}
+
 canvas {
   border: 1px dotted #eee;
   background: #fff;
