@@ -2,13 +2,16 @@
  * @Author: louzhedong 
  * @Date: 2020-04-02 20:00:52 
  * @Last Modified by: louzhedong
- * @Last Modified time: 2020-04-03 18:31:39
+ * @Last Modified time: 2020-04-03 23:33:54
  * 简易vue
  */
 import Watcher from './watcher';
+import _mounted from './_mounted';
 
 function myVue(options) {
+
   this._init(options);
+  _mounted(options)
 }
 
 myVue.prototype._init = function (options) {
@@ -20,7 +23,7 @@ myVue.prototype._init = function (options) {
   this._binding = {};
   this._observe(this.$data);
   this._compile(this.$el);
-  const _this = this;
+  let _this = this;
 
   // 双向绑定后，初始化数据
   Object.keys(this.$data).forEach(function (key) {
@@ -30,7 +33,7 @@ myVue.prototype._init = function (options) {
         item.update();
       })
     }
-  })
+  });
 }
 
 
@@ -43,7 +46,7 @@ myVue.prototype._observe = function (obj) {
         _directives: []
       };
       let value = obj[key];
-      if (typeof value === 'object') {
+      if (typeof value === 'object' && value !== null) {
         _this._observe(value);
       }
       const binding = _this._binding[key];

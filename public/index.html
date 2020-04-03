@@ -12,25 +12,25 @@
       <div class="pencil icon-content" v-click="choose('PENCIL')">
         <span class="iconfont">&#xe75c;</span>
       </div>
-      <div class="text icon-content">
+      <div class="text icon-content" v-click="choose('TEXT')">
         <span class="iconfont">&#xe75d;</span>
       </div>
       <div class="eraser icon-content" v-click="choose('ERASER')"> 
         <span class="iconfont">&#xe75e;</span>
       </div>
-      <div class="rectangle icon-content">
+      <div class="rectangle icon-content" >
         <span class="iconfont">&#xe75f;</span>
       </div>
       <div class="circle icon-content">
         <span class="iconfont">&#xe760;</span>
       </div>
-      <div class="undo icon-content">
+      <div class="undo icon-content" v-click="undoOperate">
         <span class="iconfont">&#xe656;</span>
       </div>
-      <div class="redo icon-content">
+      <div class="redo icon-content" v-click="redoOperate">
         <span class="iconfont">&#xe654;</span>
       </div>
-      <div class="clean icon-content">
+      <div class="clean icon-content" v-click="cleanBoard">
         <span class="iconfont">&#xe62b;</span>
       </div>
     </div>

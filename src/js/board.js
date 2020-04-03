@@ -1,8 +1,8 @@
 /*
  * @Author: louzhedong 
  * @Date: 2020-04-02 20:00:57 
- * @Last Modified by:   louzhedong 
- * @Last Modified time: 2020-04-02 20:00:57 
+ * @Last Modified by: louzhedong
+ * @Last Modified time: 2020-04-03 23:49:36
  * 白板插件
  */
 function Board($el) {
@@ -24,51 +24,29 @@ function Board($el) {
   this.init($el);
 }
 
-Board.prototype.init = function($el) {
+Board.prototype.init = function ($el) {
   this.canvas_element = $el;
   this.canvas_context = $el.getContext('2d');
   this.canvas_width = this.canvas_element.width;
   this.canvas_height = this.canvas_element.height;
 
-  const $pencil = document.querySelector('.pencil');
-  const $eraser = document.querySelector('.eraser');
-  const $clean = document.querySelector('.clean');
-  const $undo = document.querySelector('.undo');
-  const $redo = document.querySelector('.redo');
   const _this = this;
-  $pencil.addEventListener('click', function () {
-    _this.mode = 'PENCIL';
-  });
-
-  $eraser.addEventListener('click', function () {
-    _this.mode = 'ERASER';
-  });
-
-  $clean.addEventListener('click', function () {
-    _this.clean();
-  })
-
-  $undo.addEventListener('click', function() {
-    _this.canvasUndoOrRedo('undo');
-  })
-
-  $redo.addEventListener('click', function() {
-    _this.canvasUndoOrRedo('redo');
-  })
-
   $el.onmousedown = function (e) {
     _this.drawing = true;
   }
-
   $el.onmousemove = function (e) {
     if (_this.drawing) _this.setPosition(e);
   }
-
   $el.onmouseup = function (e) {
     _this.drawing = false;
     _this.oldPosition = {};
     _this.saveCurrentToSnapshoot();
   }
+}
+
+// 设置Board的mode
+Board.prototype.setMode = function (mode) {
+  this.mode = mode;
 }
 
 // 画笔
@@ -143,13 +121,13 @@ Board.prototype.saveCurrentToSnapshoot = function () {
 }
 
 // 撤销和反撤销 type 为 undo, redo
-Board.prototype.canvasUndoOrRedo = function(type) {
+Board.prototype.canvasUndoOrRedo = function (type) {
   const _this = this;
-  if (this.step >= 0 && type === 'undo') {
+  if (this.step > 0 && type === 'undo') {
     this.step--;
     operate();
   }
-  if (this.step <= this.snapshoot.length && type === 'redo') {
+  if (this.step >= 0 && this.step <= this.snapshoot.length && type === 'redo') {
     this.step++;
     operate();
   }
