@@ -2,7 +2,7 @@
  * @Author: louzhedong 
  * @Date: 2020-04-02 20:00:52 
  * @Last Modified by: louzhedong
- * @Last Modified time: 2020-04-03 18:03:36
+ * @Last Modified time: 2020-04-03 18:31:39
  * 简易vue
  */
 import Watcher from './watcher';
@@ -23,10 +23,10 @@ myVue.prototype._init = function (options) {
   const _this = this;
 
   // 双向绑定后，初始化数据
-  Object.keys(this.$data).forEach(function(key) {
+  Object.keys(this.$data).forEach(function (key) {
     if (_this.$data.hasOwnProperty(key)) {
       const _directives = _this._binding[key]._directives;
-      _directives.map(function(item) {
+      _directives.map(function (item) {
         item.update();
       })
     }
@@ -54,7 +54,6 @@ myVue.prototype._observe = function (obj) {
           return value;
         },
         set: function (newVal) {
-          console.log(11);
           if (value !== newVal) {
             value = newVal;
             binding._directives.forEach(function (item) {
@@ -77,15 +76,31 @@ myVue.prototype._compile = function (root) {
       this._compile(node);
     }
 
-    if(node.hasAttribute('v-click')) {
-      node.onclick = (function() {
+    if (node.hasAttribute('v-click')) {
+      node.onclick = (function () {
         const attrVal = nodes[i].getAttribute('v-click');
-        return _this.$methods[attrVal].bind(_this.$data);
+        const methodName = attrVal.split('(')[0];
+        /**
+         * (?<=exp)是以exp开头的字符串, 但不包含本身.
+         * (?=exp)就匹配惟exp结尾的字符串, 但不包含本身.
+         */
+        const regex = /(?<=\()\S+(?=\))/g;
+        const attrValMatch = attrVal.match(regex);
+        if (attrValMatch) { // v-click绑定的函数中有括号，说明带参数
+          const parameter = attrVal.match(regex)[0];
+          if (parameter.indexOf(`'`) > -1 || parameter.indexOf(`"`) > -1) {
+            return _this.$methods[methodName].bind(_this.$data, parameter.replace(new RegExp(`'`, 'g'), '').replace(new RegExp(`"`, 'g'), ''));
+          } else {
+            return _this.$methods[methodName].bind(_this.$data, _this.data[parameter]);
+          }
+        } else {
+          return _this.$methods[methodName].bind(_this.$data);
+        }
       })();
     }
 
     if (node.hasAttribute('v-model') && (node.tagName === 'INPUT' || node.tagName === 'TEXTAREA')) {
-      node.addEventListener('input', (function(index) {
+      node.addEventListener('input', (function (index) {
         const attrVal = node.getAttribute('v-model');
         _this._binding[attrVal]._directives.push(new Watcher(
           'input',
@@ -95,7 +110,7 @@ myVue.prototype._compile = function (root) {
           'value'
         ));
 
-        return function() {
+        return function () {
           _this.$data[attrVal] = nodes[index].value;
         }
       })(i));

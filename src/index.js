@@ -9,11 +9,16 @@ window.onload = function () {
   new myVue({
     el: '#app',
     data: {
-      number: 1
+      number: 1,
+      mode: 'PENCIL'
     },
     methods: {
       increment: function () {
         this.number++;
+      },
+
+      choose: function(item) {
+        this.mode = item;
       }
     }
   })

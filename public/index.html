@@ -9,13 +9,13 @@
   <div class="canvas-content" id="app">
     <canvas id="whiteBoard" width="800" height="600"></canvas>
     <div class="operate-content">
-      <div class="pencil icon-content">
+      <div class="pencil icon-content" v-click="choose('PENCIL')">
         <span class="iconfont">&#xe75c;</span>
       </div>
       <div class="text icon-content">
         <span class="iconfont">&#xe75d;</span>
       </div>
-      <div class="eraser icon-content">
+      <div class="eraser icon-content" v-click="choose('ERASER')"> 
         <span class="iconfont">&#xe75e;</span>
       </div>
       <div class="rectangle icon-content">
@@ -39,6 +39,7 @@
       <button type="button" v-click="increment">增加</button>
     </form>
     <h3 v-bind="number"></h3>
+    <h3 v-bind="mode"></h3>
   </div>
 </body>
 </html>
