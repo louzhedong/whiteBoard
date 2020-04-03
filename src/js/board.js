@@ -1,3 +1,10 @@
+/*
+ * @Author: louzhedong 
+ * @Date: 2020-04-02 20:00:57 
+ * @Last Modified by:   louzhedong 
+ * @Last Modified time: 2020-04-02 20:00:57 
+ * 白板插件
+ */
 function Board($el) {
   this.mouseX = 100;
   this.mouseY = 100;

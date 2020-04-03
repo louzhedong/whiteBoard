@@ -6,7 +6,7 @@
 </head>
 
 <body>
-  <div class="canvas-content">
+  <div class="canvas-content" id="app">
     <canvas id="whiteBoard" width="800" height="600"></canvas>
     <div class="operate-content">
       <div class="pencil icon-content">
@@ -34,6 +34,11 @@
         <span class="iconfont">&#xe62b;</span>
       </div>
     </div>
+    <form>
+      <input type="text"  v-model="number">
+      <button type="button" v-click="increment">增加</button>
+    </form>
+    <h3 v-bind="number"></h3>
   </div>
 </body>
 </html>
