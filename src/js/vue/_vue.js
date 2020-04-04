@@ -2,7 +2,7 @@
  * @Author: louzhedong 
  * @Date: 2020-04-02 20:00:52 
  * @Last Modified by: louzhedong
- * @Last Modified time: 2020-04-03 23:33:54
+ * @Last Modified time: 2020-04-04 21:32:13
  * 简易vue
  */
 import Watcher from './watcher';
@@ -11,10 +11,10 @@ import _mounted from './_mounted';
 function myVue(options) {
 
   this._init(options);
-  _mounted(options)
 }
 
 myVue.prototype._init = function (options) {
+  const vm = this;
   this.$options = options;
   this.$el = document.querySelector(options.el);
   this.$data = options.data;
@@ -34,6 +34,8 @@ myVue.prototype._init = function (options) {
       })
     }
   });
+
+  _mounted(options)
 }
 
 
