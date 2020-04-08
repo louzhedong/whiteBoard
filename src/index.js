@@ -22,6 +22,12 @@ new myVue({
     choose: function (item) {
       this.mode = item;
       this.board.setMode(item);
+
+      if (item === 'TEXT') {
+        document.body.style.cursor = 'text';
+      } else {
+        document.body.style.cursor = 'default';
+      }
     },
 
     undoOperate: function() {

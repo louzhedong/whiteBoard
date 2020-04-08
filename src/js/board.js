@@ -2,7 +2,7 @@
  * @Author: louzhedong 
  * @Date: 2020-04-02 20:00:57 
  * @Last Modified by: louzhedong
- * @Last Modified time: 2020-04-03 23:49:36
+ * @Last Modified time: 2020-04-08 19:32:07
  * 白板插件
  */
 function Board($el) {
@@ -17,7 +17,7 @@ function Board($el) {
   this.canvas_height = 0;
   this.oldPosition = {};    // 老的坐标
   this.drawing = false; // 是否正在画图
-  this.mode = 'PENCIL';  // PENCIL; ERASER
+  this.mode = 'PENCIL';  // PENCIL; ERASER; TEXT
 
   this.snapshoot = []; // 快照
   this.step = -1; // 当前的快照索引
@@ -32,15 +32,28 @@ Board.prototype.init = function ($el) {
 
   const _this = this;
   $el.onmousedown = function (e) {
-    _this.drawing = true;
+    if (this.mode === 'TEXT') {  // 文字，就出现文本输入框
+
+    } else {
+      _this.drawing = true;
+    }
   }
   $el.onmousemove = function (e) {
-    if (_this.drawing) _this.setPosition(e);
+    if (this.mode === 'TEXT') {
+
+    } else {
+      if (_this.drawing) _this.setPosition(e);
+    }
+
   }
   $el.onmouseup = function (e) {
-    _this.drawing = false;
-    _this.oldPosition = {};
-    _this.saveCurrentToSnapshoot();
+    if (this.mode === 'TEXT') {
+
+    } else {
+      _this.drawing = false;
+      _this.oldPosition = {};
+      _this.saveCurrentToSnapshoot();
+    }
   }
 }
 
