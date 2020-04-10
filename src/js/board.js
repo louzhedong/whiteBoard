@@ -2,7 +2,7 @@
  * @Author: louzhedong 
  * @Date: 2020-04-02 20:00:57 
  * @Last Modified by: louzhedong
- * @Last Modified time: 2020-04-08 19:32:07
+ * @Last Modified time: 2020-04-09 19:38:46
  * 白板插件
  */
 function Board($el) {
@@ -31,14 +31,24 @@ Board.prototype.init = function ($el) {
   this.canvas_height = this.canvas_element.height;
 
   const _this = this;
-  $el.onmousedown = function (e) {
+  $el.onmousedown = (e) => {
     if (this.mode === 'TEXT') {  // 文字，就出现文本输入框
-
+      const box = document.createElement('div');
+      box.id = Math.random() * 10000;
+      box.style.width = '100px';
+      box.style.height = '40px';
+      box.style.border = '1px solid #dadada';
+      const position = this.mousePosition(e);
+      box.style.position = 'absolute';
+      box.style.left = position.x;
+      box.style.top = position.y - 20;
+      box.style.cursor = 'text';
+      document.documentElement.appendChild(box);
     } else {
       _this.drawing = true;
     }
   }
-  $el.onmousemove = function (e) {
+  $el.onmousemove = (e) => {
     if (this.mode === 'TEXT') {
 
     } else {
@@ -46,7 +56,7 @@ Board.prototype.init = function ($el) {
     }
 
   }
-  $el.onmouseup = function (e) {
+  $el.onmouseup = (e) => {
     if (this.mode === 'TEXT') {
 
     } else {

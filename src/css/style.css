@@ -1,3 +1,6 @@
+html {
+  position: relative;
+}
 body {
   background: #eee;
 }
