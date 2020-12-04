@@ -1,0 +1,102 @@
+// 将设置放入此文件中以覆盖默认设置
+{
+  "editor.fontSize": 12,
+  "editor.wordWrapColumn": 160,
+  "editor.wordWrap": "on",
+  "editor.tabSize": 2,
+  "editor.formatOnType": true,
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": true,
+  "workbench.iconTheme": "material-icon-theme",
+  "fileheader.customMade": {
+    "Author": "louzhedong",
+    "Date": "Do not edit", //这里就得这么填，才能自动校准时间
+    "LastEditors": "louzhedong",
+    "LastEditTime": "Do not edit", //这里就得这么填，才能自动校准时间
+    "Description": "描述",
+  },
+  "px-to-rem.px-per-rem": 50,
+  "beautify.tabSize": 2,
+  "files.associations": {
+    "*.vue": "vue",
+    "*.jsx": "javascript",
+    "*.cjson": "jsonc",
+    "*.wxss": "css",
+    "*.wxs": "javascript"
+  },
+  "emmet.syntaxProfiles": {
+    "vue-html": "html",
+    "vue": "html"
+  },
+  "eslint.options": {
+    "extensions": [
+      ".js",
+      ".vue",
+      "jsx",
+      "tsx",
+      ".ts",
+    ]
+  },
+  "eslint.run": "onSave",
+  "window.zoomLevel": 0,
+  "gitlens.advanced.messages": {
+    "suppressCommitHasNoPreviousCommitWarning": false,
+    "suppressCommitNotFoundWarning": false,
+    "suppressFileNotUnderSourceControlWarning": false,
+    "suppressGitVersionWarning": false,
+    "suppressLineUncommittedWarning": false,
+    "suppressNoRepositoryWarning": false,
+    "suppressResultsExplorerNotice": true,
+    "suppressShowKeyBindingsNotice": true,
+    "suppressUpdateNotice": false,
+    "suppressWelcomeNotice": true
+  },
+  "python.disablePromptForFeatures": [
+    "pylint"
+  ],
+  "gitlens.keymap": "alternate",
+  "gitlens.gitExplorer.files.layout": "tree",
+  "gitlens.historyExplorer.enabled": true,
+  "gitlens.views.repositories.files.layout": "tree",
+  "gitlens.views.fileHistory.enabled": true,
+  "gitlens.views.lineHistory.enabled": true,
+  "git.ignoreMissingGitWarning": true,
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "gitlens.gitCommands.skipConfirmations": [
+    "fetch:command",
+    "stash-push:command",
+    "switch:command",
+    "pull:menu"
+  ],
+  "gitlens.gitCommands.closeOnFocusOut": true,
+  "files.autoSave": "off",
+  "javascript.preferences.quoteStyle": "single",
+  "typescript.preferences.quoteStyle": "single",
+  "prettier.jsxSingleQuote": true,
+  "prettier.singleQuote": true,
+  "prettier.useTabs": false,
+  "prettier.semi": true,
+  "prettier.bracketSpacing": true,
+  "prettier.jsxBracketSameLine": false,
+  "prettier.arrowParens": "avoid",
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[less]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "workbench.colorTheme": "Atom One Dark",
+  "emmet.includeLanguages": {
+    "wxml": "html"
+  },
+  "minapp-vscode.disableAutoConfig": true,
+}
